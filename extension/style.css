@@ -1,0 +1,14 @@
+html, body {
+    height: 600px;  /* or whatever height you prefer */
+    width: 500px;   /* or whatever width you prefer */
+    min-height: 600px;
+    min-width: 500px;
+    padding: 10px;
+    margin: 0;
+    overflow-y: auto; /* allow scrolling if content exceeds height */
+}
+
+#tree {
+    height: 100%;
+    overflow-y: auto; /* make tree scrollable if needed */
+}
