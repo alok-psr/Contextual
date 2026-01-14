@@ -1,14 +1,28 @@
-function changeName(titles) {
-  if (!titles) return;
-  console.log('changing', titles.length);
-  for (const title of titles) {
-    title.textContent = 'cat cat cat';
+console.log('content script loaded');
+
+// function to get the selected text
+function getContent() {
+  const selected = window.getSelection().toString().trim();
+
+  if (!selected) { 
+    console.log("returning url")
+    return document.URL 
   }
+  console.log("returning selected");
+  return selected
+
 }
 
-console.log('content script loaded');
-let nodes = document.querySelectorAll('.yt-core-attributed-string.yt-core-attributed-string--white-space-pre-wrap');
-if (!nodes || nodes.length === 0) {
-  nodes = document.querySelectorAll('ytd-rich-grid-media #video-title, ytd-video-renderer #video-title');
-}
-changeName(nodes);
+// chrome.runtime.onMessage(msg)
+chrome.runtime.onMessage.addListener((msg)=>{
+  console.log("msg from content.js :: ",msg.type);
+  if (msg.type === "GET_CONTENT"){
+    const content = getContent();
+    chrome.runtime.sendMessage({
+      type:"FILE_CONTENT",
+      content:content
+    })
+  }
+})
+
+
