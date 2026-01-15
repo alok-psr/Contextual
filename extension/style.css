@@ -1,62 +1,18 @@
-/* html, body {
-    height: 600px;
-    width: 500px;
-    min-height: 600px;
-    min-width: 500px;
-    padding: 10px;
-    margin: 0;
-    overflow-y: auto;
-    background-image: linear-gradient(#7b88a4 1.5px, transparent 1.5px), linear-gradient(to right, #7b88a4 1.5px, transparent 1.5px);
-    background-size: 14px 14px;
-    background-color: #230a32;
-}
-
-#tree {
-    height: fit-content;
-    overflow-y: auto;
-    background: #a30309;
-    background: -webkit-linear-gradient(0deg, #a30309 0%, #ed2969 100%);
-    background: linear-gradient(0deg, #a30309 0%, #ed2969 100%);
-    padding:10px ;
-    border-radius: 2%;
-    margin: 10px;
-    backdrop-filter: blur(10px);
-}
-
-#submit {
-    padding: 5px;
-    font-size: 20px;
-    border-radius: 10%;
-    margin: 10px;
-}
-.tree-text{
-    color: antiquewhite;
-    font-size: larger;
-}
-
-.tree-text:hover {
-    cursor: pointer;
-    color: rgb(45, 198, 147);
-}
- */
-
 
  html, body {
-    height: 600px;
+    height: 400px;
     width: 500px;
-    min-height: 600px;
     min-width: 500px;
-    padding: 10px;
+    padding: 5px;
     margin: 0;
     overflow-y: auto;
-
-    /* simple dark background */
     background-color: #0f172a;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     color: #e5e7eb;
+    user-select: none;
 }
 
-/* tree container as a simple card */
+
 #tree {
     max-height: 520px;
     overflow-y: auto;
@@ -64,10 +20,11 @@
     border: 1px solid #334155;
     padding: 8px 10px;
     border-radius: 6px;
-    margin: 10px 0;
+    margin-right: 8px;
+
 }
 
-/* submit button – simple, no fancy stuff */
+
 #submit {
     padding: 6px 10px;
     font-size: 14px;
@@ -82,24 +39,20 @@
     background-color: #111827;
 }
 
-
-
-/* generic tree node styling */
 .tree-node {
     margin: 2px 0;
     padding: 2px 4px 2px 6px;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.3;
     color: #e5e7eb;
     cursor: pointer;
 
-    /* subtle guide line on the left when hovered */
     border-left: 2px solid transparent;
     border-bottom: 2px solid transparent;
 }
 
-/* root can be slightly bolder */
 .tree-node-root {
+    font-size: 16px;
     margin: 2px 0;
     padding: 2px 4px 2px 6px;
     font-weight: 600;
@@ -115,7 +68,6 @@
     color: #f9fafb;
 }
 
-/* fix hover selector; keep it simple */
 .tree-node:hover {
     cursor: pointer;
     background-color: #020617;
@@ -124,4 +76,20 @@
 }
 .selected{
     border-bottom-color: #38bdf8;
+}
+
+.cbText{
+    font-size: x-large;
+}
+.cbText:hover{
+    font-size: x-large;
+    color: #f0c4b4;
+}
+.cbox{
+    size: 10px;
+}
+
+#toggle-container{
+    display: flex;
+    flex-direction: column;
 }

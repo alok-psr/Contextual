@@ -6,8 +6,30 @@
 
   </head>
   <body>
-    <div id="toggles"></div>
+    <div id="toggle-container">
+      <label for="break" class="cbText">
+        <input type="checkbox" class="cbox" name="break" id="break">
+        Break
+      </label>
+
+      <label for="breakLine" class="cbText">
+        <input type="checkbox" class="cbox" name="break-line" id="breakLine">
+        Break Line
+      </label>
+      
+      <label for="newHeading" class="cbText">
+        <input type="checkbox" class="cbox" name="new-heading" id="newHeading">
+        New Heading
+      </label>
+      
+    </div>
     <div id="tree"></div>
+
+    <label for="newNode" class="cbText">
+      <input type="checkbox" class="cbox" name="new-node" id="newNode">
+      New Node
+    </label>
+    <br>
     <button id="submit" >Submit</button>
     <script src="scripts/tree.js"></script>
   </body>
