@@ -58,10 +58,12 @@ const treeDiv = document.getElementById("tree")
 let child = document.createElement("h3")
 child.innerText = tempTree.name
 // child.classList.add(`hover:bg-cyan-200 pt-2`)
-child.id = tempTree.id
+child.id = tempTree.path
+child.classList.add("tree-node-root")
 
 treeDiv.appendChild(child)
 
+// fill the treee from the given data ... later api willl provide the object of tree
 function addChilds(childArr,root,tab=2,styleChar = '_'){
     if (childArr.length === 0){
         return
@@ -75,12 +77,25 @@ function addChilds(childArr,root,tab=2,styleChar = '_'){
 
         // space on the left of underlins
         childEle.style.marginLeft = `${tab * 0.5}rem`; 
-        // childEle.classList.add("hover:bg-cyan-200","pt-2")
-        childEle.id = child.id
-        
+        childEle.classList.add("tree-node")
+        // we can get this path when the user clicks on the text
+        childEle.id = child.path
+
         root.appendChild(childEle)
         addChilds(child.children,root,tab+2)
     }
 }
 
 addChilds(tempTree.children, treeDiv,2,'_')
+
+// at a time only one of the nodes should be selected 
+// on click the node is selected and if any other node has selected class then it is removed
+treeDiv.addEventListener("click", (e) => {
+  const node = e.target.closest(".tree-node, .tree-node-root")
+  if (!node) return
+
+  document.querySelectorAll(".tree-node.selected, .tree-node-root.selected")
+      .forEach(el => el.classList.remove("selected"))
+
+  node.classList.add("selected")
+})
