@@ -1,0 +1,19 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "server Contextual",
+  "license": "ISC",
+  "author": "Alok",
+  "type": "module",
+  "main": "main.js",
+  "scripts": {
+    "test": "start",
+    "dev": "nodemon main.js"
+  },
+  "dependencies": {
+    "directory-tree": "^3.5.2",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "nodemon": "^3.1.11"
+  }
+}
