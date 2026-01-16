@@ -17,9 +17,9 @@ function filterTree(node) {
 
 const getTree = async(req, res) => {
     try {
-        const tempPath = '/home/alok/my_files/projects/contextual/testDir/testing'
-    
-        const tree = directoryTree(tempPath, {
+        const projPath = process.env.PROJECT_PATH
+
+        const tree = directoryTree(projPath, {
           exclude: [/\.obsidian/,/\.md/]
         })
         

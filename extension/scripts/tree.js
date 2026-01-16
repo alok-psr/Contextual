@@ -113,6 +113,55 @@ fetchTree().then(tree => {
 
     addChilds(tree.children, treeDiv, 2, '_')
 
+    const formPath = document.getElementById("formPath")
+    // Load content and selected path from storage when popup opens
+    function loadFormDataFromStorage() {
+        chrome.storage.local.get(['content', 'selectedPath'], (result) => {
+            const formContent = document.getElementById("formContent")
+
+            // set formcontent
+            if (formContent && result.content) {
+                formContent.value = result.content
+            }
+            
+            // set formpath
+            if (result.selectedPath && formPath) {
+                formPath.value = result.selectedPath
+                
+                // Find and select the corresponding node in the tree
+                const selectedNode = document.getElementById(result.selectedPath)
+                if (selectedNode) {
+                    // Remove previous selection
+                    document.querySelectorAll(".tree-node.selected, .tree-node-root.selected")
+                        .forEach(el => el.classList.remove("selected"))
+                    // Add selection to this node
+                    selectedNode.classList.add("selected")
+                }
+            }
+        })
+    }
+    
+    // Load form data when page loads
+    loadFormDataFromStorage()
+    
+    // Also listen for storage changes (in case content is updated while popup is open)
+    chrome.storage.onChanged.addListener((changes, areaName) => {
+        if (areaName === 'local') {
+            if (changes.content) {
+                const formContent = document.getElementById("formContent")
+                if (formContent) {
+                    formContent.value = changes.content.newValue || ""
+                }
+            }
+            if (changes.selectedPath) {
+                const formPath = document.getElementById("formPath")
+                if (formPath) {
+                    formPath.value = changes.selectedPath.newValue || ""
+                }
+            }
+        }
+    })
+
     // at a time only one of the nodes should be selected 
     // on click the node is selected and if any other node has selected class then it is removed
     treeDiv.addEventListener("click", (e) => {
@@ -121,7 +170,77 @@ fetchTree().then(tree => {
 
         document.querySelectorAll(".tree-node.selected, .tree-node-root.selected")
             .forEach(el => el.classList.remove("selected"))
-
+        console.log(node.id)
+        chrome.storage.local.set({selectedPath:node.id})
         node.classList.add("selected")
+        
+        // Update path field when node is selected
+        if (formPath) {
+            formPath.value = node.id
+            // Store selected path in storage for persistence
+            chrome.storage.local.set({ selectedPath: node.id })
+        }
+        
+        // Load content from storage (in case it was updated)
+        chrome.storage.local.get(['content'], (result) => {
+            const formContent = document.getElementById("formContent")
+            if (formContent && result.content) {
+                formContent.value = result.content
+            }
+        })
     })
+})
+
+// Handle form submission
+document.getElementById("submit")?.addEventListener("click", (e) => {
+    e.preventDefault()
+    
+    const form = document.getElementById("contentForm")
+    if (!form) return
+    
+    const formData = {
+        title: document.getElementById("formTitle").value,
+        content: document.getElementById("formContent").value,
+        path: document.getElementById("formPath").value,
+        note: document.getElementById("formNote").value
+    }
+    
+    if (!formData.content || !formData.path) {
+        alert("Content and Path are required fields!")
+        return
+    }
+    
+    const breakToggle = document.getElementById("break")
+    const brLineToggle = document.getElementById("breakLine")
+    const newHeadToggle = document.getElementById("newHeading")
+    const newNodeToggle = document.getElementById("newNode")
+    const timeToggle = document.getElementById("time")
+    
+    const toggleData = {
+        break: breakToggle.checked,
+        brLine: brLineToggle.checked,
+        newHead: newHeadToggle.checked,
+        newNode: newNodeToggle.checked,
+        time: timeToggle.checked,
+    }
+
+    chrome.runtime.sendMessage({
+        type:"FORM-SUBMITTED",
+        formData,
+        toggleData
+    }, (response) => {
+        if (response && response.success) {
+            console.log("Success:", response);
+            alert("Content saved successfully!");
+            form.reset();
+        } else {
+            console.error("err occoured while saving data via server:", response);
+            alert("Error: " + (response?.error || "Failed to save content"));
+        }
+    })
+    
+    
+    console.log("Form submitted:", formData)
+    
+    
 })

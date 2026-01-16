@@ -13,6 +13,6 @@ export default function formatMarkdown(content, source,styling,title='', note=''
     console.log(formattedDateTime);
     
     
-    return `${styling.brLine? '- - -':''}\n${styling.newHead ? '##':'<br>'} ${title == '' ? formattedDateTime:title}  ${styling.time?`----${formattedDateTime}---- [source](${source})`:`---- [source](${source})`}\n> ${content}\n<span style="color: #fdf59b;">${note}</span>\n\n${styling.brLine? '- - -':''}`
+    return `${styling.brLine? '- - -':''}\n${styling.newHead ? '##':'<br>'} ${title == '' ? formattedDateTime:title}  ${styling.time?`----${formattedDateTime}---- [source](${source})`:`---- [source](${source})`}\n ${content}\n<span style="color: #fdf59b;">${note}</span>\n\n${styling.brLine? '- - -':''}`
 }
   

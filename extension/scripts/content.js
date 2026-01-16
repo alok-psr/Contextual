@@ -14,12 +14,10 @@ function getContent() {
 
 chrome.runtime.onMessage.addListener((msg)=>{
   console.log("msg from content.js :: ",msg.type);
+  console.log("sending message ----------")
   if (msg.type === "GET_CONTENT"){
     const content = getContent();
-    chrome.runtime.sendMessage({
-      type:"FILE_CONTENT",
-      content:content
-    })
+    chrome.storage.local.set({content,sourceURL:document.URL})
   }
 })
 
