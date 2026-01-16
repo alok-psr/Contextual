@@ -18,13 +18,13 @@
     "commands": {
       "process-content": {
         "suggested_key": {
-          "default": "Alt+A"
+          "default": "Alt+S"
         },
         "description": "add content directly in previous selected file"
       },
       "process-popup":{
         "suggested_key":{
-          "default":"Alt+Shift+C"
+          "default":"Alt+Shift+S"
         },
         "description":"add content via the popup"
       }
