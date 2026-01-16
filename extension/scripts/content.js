@@ -10,10 +10,8 @@ function getContent() {
   }
   console.log("returning selected");
   return selected
-
 }
 
-// chrome.runtime.onMessage(msg)
 chrome.runtime.onMessage.addListener((msg)=>{
   console.log("msg from content.js :: ",msg.type);
   if (msg.type === "GET_CONTENT"){
