@@ -6,7 +6,7 @@ Contextual is a research-first knowledge tool that helps you save ideas without 
 
 - **Web Content Capture**: Select text or capture entire URLs from any webpage
 - **Knowledge Tree Organization**: Organize captured content into a hierarchical tree structure
-- **Context Preservation**: Automatically save source URLs and maintain context for all captures
+- **Context Preservation**: Automatically save source URLs and maintain context for all captures - curently only texts captures work but planning to add vedio timeline bookmarks as well and much more
 - **Chrome Extension**: Quick keyboard shortcuts for seamless content capture
 - **Local Server**: Backend API for managing and storing your knowledge base
 
