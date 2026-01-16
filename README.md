@@ -190,10 +190,6 @@ The server provides the following endpoints:
 - `PUT /api/content` - Save content to existing node
 - `PUT /api/content/new` - Save content to a new node
 
-## License
-
-[Add your license here]
-
 ## Author
 
 Alok
