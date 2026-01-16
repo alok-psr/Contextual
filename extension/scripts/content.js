@@ -18,6 +18,13 @@ chrome.runtime.onMessage.addListener((msg)=>{
   if (msg.type === "GET_CONTENT"){
     const content = getContent();
     chrome.storage.local.set({content,sourceURL:document.URL})
+    
+    chrome.runtime.sendMessage({
+      type: "FILE_CONTENT",
+      content: content,
+      sourceURL:  document.URL
+    });
+  
   }
 })
 
